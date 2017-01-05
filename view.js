@@ -175,6 +175,22 @@
     };
 
     /**
+     * @callback ExtractViewConstructorCallback
+     * @param {Function} constructor
+     */
+    /**
+     *
+     * @param {Function} constructor
+     * @param {ExtractViewConstructorCallback} callback
+     * @return {View}
+     */
+    View.prototype.extractViewConstructor = function (constructor, callback) {
+        callback(constructor);
+
+        return this;
+    };
+    
+    /**
      * returns the template as template function
      * @returns {Function}
      */
@@ -322,22 +338,6 @@
     View.prototype.render = function () {
         this.renderInsert()
             .renderConfig();
-
-        return this;
-    };
-
-    /**
-     * @callback ExtractViewConstructorCallback
-     * @param {Function} constructor
-     */
-    /**
-     *
-     * @param {Function} constructor
-     * @param {ExtractViewConstructorCallback} callback
-     * @return {View}
-     */
-    View.prototype.extractViewConstructor = function (constructor, callback) {
-        callback(constructor);
 
         return this;
     };
