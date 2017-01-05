@@ -3,14 +3,14 @@
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define(['jquery', 'lodash', 'backbone', 'backbone-prototype-compatibility'], function (jQuery, lodash, Backbone) {
-            return Backbone.ViewEx = factory(jQuery, lodash, BackboneView, Backbone.compatibility);
+            return Backbone.ViewEx = factory(jQuery, lodash, Backbone.View, Backbone.compatibility);
         });
 
     } else if (typeof exports !== 'undefined') {
-        root.Backbone.ViewEx = factory(root.jQuery, root.lodash, root.BackboneView, root.Backbone.compatibility);
+        root.Backbone.ViewEx = factory(root.jQuery, root.lodash, root.Backbone.View, root.Backbone.compatibility);
 
     } else {
-        root.Backbone.ViewEx = factory(root.jQuery, root.lodash, root.BackboneView, root.Backbone.compatibility);
+        root.Backbone.ViewEx = factory(root.jQuery, root.lodash, root.Backbone.View, root.Backbone.compatibility);
     }
 }(this, function (jQuery, lodash, BackboneView, compatibility) {
 
@@ -189,7 +189,7 @@
 
         return this;
     };
-    
+
     /**
      * returns the template as template function
      * @returns {Function}
