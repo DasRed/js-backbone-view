@@ -48,6 +48,7 @@
     View.TEMPLATE_INSERT_TYPE_APPEND  = 'append';
     View.TEMPLATE_INSERT_TYPE_PREPEND = 'prepend';
     View.TEMPLATE_INSERT_TYPE_BEFORE  = 'before';
+    View.TEMPLATE_INSERT_TYPE_AFTER   = 'after';
 
     // prototype
     View.prototype = Object.create(BackboneView.prototype, {
@@ -192,23 +193,32 @@
 
     /**
      * returns the template as template function
+     * @param {String|Function} [template]
      * @returns {Function}
      */
-    View.prototype.getTemplate = function () {
-        if (this.template instanceof Function) {
-            return this.template;
+    View.prototype.getTemplate = function (template) {
+        template = template !== undefined ? template : this.template;
+        template = template || '';
+
+        if (template instanceof Function) {
+            return template;
         }
 
-        return lodash.template(this.template);
+        return lodash.template(template);
     };
 
     /**
      * returns the template rendered with template data as HTML
      *
+     * @param {String|Function} [template]
      * @returns {String}
      */
-    View.prototype.getTemplateAsHtmlForRender = function () {
-        var template = this.getTemplate();
+    View.prototype.getTemplateAsHtmlForRender = function (template) {
+        if (template === null) {
+            return null;
+        }
+
+        template = this.getTemplate(template);
         return template(this.getTemplateDataForRender());
     };
 
@@ -386,7 +396,13 @@
      */
     View.prototype.renderInsert = function () {
         var element;
+
+        this.rendered = true;
+
         var html = this.getTemplateAsHtmlForRender();
+        if (html === '') {
+            return this;
+        }
 
         switch (this.templateInsertType) {
             case View.TEMPLATE_INSERT_TYPE_APPEND:
@@ -407,12 +423,16 @@
                 this.setElement(element);
                 break;
 
+            case View.TEMPLATE_INSERT_TYPE_AFTER:
+                element = jQuery(html);
+                this.$el.after(element);
+                this.setElement(element);
+                break;
+
             case View.TEMPLATE_INSERT_TYPE_REPLACE:
             default:
                 this.$el.html(html);
         }
-
-        this.rendered = true;
 
         return this;
     };
