@@ -336,6 +336,7 @@
         }
 
         this.views[key].remove();
+        this.views[key] = undefined;
         this.views[key] = this.createView(key, Object.assign(this.config[key], {
             renderOnInitialize: false
         }));
