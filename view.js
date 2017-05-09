@@ -336,6 +336,9 @@
         }
 
         this.views[key].remove();
+        this.views[key] = this.createView(key, Object.assign(this.config[key], {
+            renderOnInitialize: false
+        }));
 
         return this;
     };
@@ -371,7 +374,7 @@
                 counterLoaded++;
                 config.constructor = constructor;
 
-                if (counter > 0 && counter == counterLoaded && viewsRendered === false) {
+                if (counter > 0 && counter === counterLoaded && viewsRendered === false) {
                     viewsRendered = true;
                     lodash.forEach(self.config, function (config, key) {
                         self.createView(key, config);
@@ -382,7 +385,7 @@
             return acc + 1;
         }, counter);
 
-        if (counter > 0 && counter == counterLoaded && viewsRendered === false) {
+        if (counter > 0 && counter === counterLoaded && viewsRendered === false) {
             lodash.forEach(this.config, function (config, key) {
                 self.createView(key, config);
             });
