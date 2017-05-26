@@ -7,10 +7,10 @@
         });
 
     } else if (typeof exports !== 'undefined') {
-        root.Backbone.ViewEx = factory(root.jQuery, root.lodash, root.Backbone.View, root.Backbone.compatibility);
+        root.Backbone.ViewEx = factory(root.jQuery, root.lodash || root._, root.Backbone.View, root.Backbone.compatibility);
 
     } else {
-        root.Backbone.ViewEx = factory(root.jQuery, root.lodash, root.Backbone.View, root.Backbone.compatibility);
+        root.Backbone.ViewEx = factory(root.jQuery, root.lodash || root._, root.Backbone.View, root.Backbone.compatibility);
     }
 }(this, function (jQuery, lodash, BackboneView, compatibility) {
 
@@ -111,6 +111,16 @@
          */
         renderOnInitialize: {
             value: true,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        },
+
+        /**
+         * @var {String|Function}
+         */
+        template: {
+            value: null,
             enumerable: true,
             configurable: true,
             writable: true
