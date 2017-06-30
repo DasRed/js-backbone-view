@@ -316,6 +316,21 @@
     View.prototype._removeElement = function () {
         this.rendered = false;
 
+        this.removeElementFromDom();
+
+        // this is very important to remove all DOM Elements!!!
+        this.undelegateEvents();
+
+        return this;
+    };
+
+    /**
+     * this change the reaction of view remove. Backbone removes the complete element. Including the container
+     * but we do not want to remove the container. Just make it empty.
+     *
+     * @return {View}
+     */
+    View.prototype.removeElementFromDom = function () {
         switch (this.templateInsertType) {
             case View.TEMPLATE_INSERT_TYPE_APPEND:
             case View.TEMPLATE_INSERT_TYPE_PREPEND:
@@ -328,9 +343,6 @@
                 this.$el.html('');
                 break;
         }
-
-        // this is very important to remove all DOM Elements!!!
-        this.undelegateEvents();
 
         return this;
     };
