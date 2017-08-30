@@ -10,6 +10,7 @@ This view extends the Backbone.View with some new features:
 ## Install
 ```
 bower install backbone-view --save
+npm install js-backbone-view --save
 ```
 
 ## Usage
