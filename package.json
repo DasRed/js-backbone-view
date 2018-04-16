@@ -1,6 +1,6 @@
 {
   "name": "js-backbone-view",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description":  "Better handling for backbone views.",
   "main": "view.js",
   "repository": {

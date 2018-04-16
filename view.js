@@ -42,6 +42,11 @@
         BackboneView.call(this, options);
 
         console.debug(this.name, '(' + this.cid + ') created.');
+
+        // render this view, if the view will be created
+        if (this.renderOnInitialize === true) {
+            this.render();
+        }
     }
 
     View.TEMPLATE_INSERT_TYPE_REPLACE = 'replace';
@@ -277,11 +282,6 @@
 
             return config;
         });
-
-        // render this view, if the view will be created
-        if (this.renderOnInitialize === true) {
-            this.render();
-        }
 
         BackboneView.prototype.initialize.apply(this, arguments);
 
