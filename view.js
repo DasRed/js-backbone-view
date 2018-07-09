@@ -335,6 +335,7 @@
             case View.TEMPLATE_INSERT_TYPE_APPEND:
             case View.TEMPLATE_INSERT_TYPE_PREPEND:
             case View.TEMPLATE_INSERT_TYPE_BEFORE:
+            case View.TEMPLATE_INSERT_TYPE_AFTER:
                 this.$el.remove();
                 break;
 
